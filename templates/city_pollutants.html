@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>City Pollutant Levels</title>
+     <!-- <style>
+         body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; }
+        .container { background: #fff; padding: 30px; border-radius: 8px; max-width: 500px; margin: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h2 { text-align: center; }
+        form { margin-bottom: 20px; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
+        th { background: #f0f0f0; }
+        .error { color: red; text-align: center; }
+         
+    </style>  -->
+  <style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url('../static/background.gif');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .container {
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        max-width: 500px;
+        margin: 40px auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    form {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    th {
+        background: #f0f0f0;
+    }
+
+    .error {
+        color: red;
+        text-align: center;
+    }
+</style>
+
+</head>
+<body>
+<div class="container">
+    <h2>Check Real-Time Pollutant Levels</h2>
+    <form method="post">
+        <input type="text" name="city" placeholder="Enter city name (e.g., delhi)" required>
+        <button type="submit">Get Pollutants</button>
+    </form>
+    {% if city %}
+        <h3>Pollutant Levels for {{ city|capitalize }}</h3>
+        {% if pollutants %}
+        <table>
+            <tr>
+                <th>Pollutant</th>
+                <th>Value</th>
+            </tr>
+            <tr><td>PM2.5</td><td>{{ pollutants['PM2.5'] if pollutants['PM2.5'] is not none else 'N/A' }}</td></tr>
+            <tr><td>PM10</td><td>{{ pollutants['PM10'] if pollutants['PM10'] is not none else 'N/A' }}</td></tr>
+            <tr><td>O3</td><td>{{ pollutants['O3'] if pollutants['O3'] is not none else 'N/A' }}</td></tr>
+            <tr><td>NO2</td><td>{{ pollutants['NO2'] if pollutants['NO2'] is not none else 'N/A' }}</td></tr>
+            <tr><td>CO</td><td>{{ pollutants['CO'] if pollutants['CO'] is not none else 'N/A' }}</td></tr>
+            <tr><td>SO2</td><td>{{ pollutants['SO2'] if pollutants['SO2'] is not none else 'N/A' }}</td></tr>
+        </table>
+        {% else %}
+            <div class="error">Data not available for this city.</div>
+        {% endif %}
+    {% endif %}
+</div>
+</body>
+</html>
